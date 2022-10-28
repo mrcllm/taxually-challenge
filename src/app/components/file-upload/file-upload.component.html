@@ -1,0 +1,118 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4 mt-5">
+      <div class="card border-0 shadow">
+        <div class="card-body">
+          <form [formGroup]="UploadForm">
+            <input
+              type="file"
+              class="text-nowrap text-truncate file"
+              (change)="selectFile($event)"
+              formControlName="upload"
+            />
+            <button
+              type="button"
+              class="btn btn-dark"
+              [disabled]="!selectedFiles"
+              (click)="uploadFile()"
+            >
+              Upload
+            </button>
+          </form>
+
+          <div class="progress mt-2">
+            <div
+              class="progress-bar progress-bar-info"
+              role="progressbar"
+              attr.aria-valuenow="{{ percentage }}"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              [ngStyle]="{ width: percentage + '%' }"
+              [ngClass]="{
+                'bg-success': percentage > 70,
+                'bg-info': percentage > 40 && percentage < 70,
+                'bg-warning': percentage > 20 && percentage < 40,
+                'bg-danger': percentage > 0 && percentage < 20
+              }"
+            >
+              {{ percentage }}%
+            </div>
+          </div>
+          <div *ngIf="showMsg">
+            <div class="alert alert-success" role="alert">
+              <h4 class="alert-heading">Upload Successful</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div class="mb-3 mt-3">
+        <h4 class="text-dark">My Files</h4>
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">File name</th>
+            <th scope="col">File size</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let file of listOfFiles">
+            <th>{{ file.name }}</th>
+            <td>{{ file.size }}</td>
+            <td>
+              <a
+                class="btn btn-outline-danger ms-2"
+                type="button"
+                (click)="show2(modal2)"
+                >Delete</a
+              >
+            </td>
+            <div #modal2 class="modal fade" data-backdrop="false" tabindex="-1">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">
+                      Are you sure you want delete this file?
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    Once you delete a file, there is no going back. Please be
+                    certain.
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-dark"
+                      (click)="deleteFile(file)"
+                      data-bs-dismiss="modal"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
