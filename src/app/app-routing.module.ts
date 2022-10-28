@@ -5,17 +5,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from './shared/guard/auth.guard';
-import {
-  redirectUnauthorizedTo,
-  redirectLoggedInTo,
-  canActivate,
-} from '@angular/fire/auth-guard';
-import { AngularFireAuthGuard } from '@angular/fire/compat/auth-guard';
-import {
-  AngularFireAuth,
-  AngularFireAuthModule,
-} from '@angular/fire/compat/auth';
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
+
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
