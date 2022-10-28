@@ -12,7 +12,6 @@ export class FileService {
     private fireStorage: AngularFireStorage
   ) {}
 
-  // save meta data of file to firestore
   saveMetaDataOfFile(fileObj: FileMetaData) {
     const fileMeta = {
       id: '',
@@ -26,12 +25,10 @@ export class FileService {
     this.fireStore.collection('/Upload').add(fileMeta);
   }
 
-  // dislpay all files
   getAllFiles() {
     return this.fireStore.collection('/Upload').snapshotChanges();
   }
 
-  // delete file
   deleteFile(fileMeta: FileMetaData) {
     this.fireStore.collection('/Upload').doc(fileMeta.id).delete();
     this.fireStorage.ref('/Uploads/' + fileMeta.name).delete();

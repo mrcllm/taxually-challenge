@@ -1,13 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { switchMap } from 'rxjs';
-import { UsersService } from 'src/app/shared/services/users.service';
+
 import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
@@ -18,13 +12,7 @@ import { AuthService } from '../../shared/services/auth.service';
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
 
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-
-    private usersService: UsersService,
-    private fb: FormBuilder
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   isProgressVisible!: boolean;
   firebaseErrorMessage!: string;

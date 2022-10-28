@@ -1,18 +1,10 @@
-import {
-  Component,
-  OnInit,
-  QueryList,
-  ViewChildren,
-  VERSION,
-  ElementRef,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { finalize } from 'rxjs/operators';
-
-import { FileService } from 'src/app/shared/services/file.service';
-import { FileMetaData } from 'src/app/models/file-upload.model';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Modal } from 'bootstrap';
+import { finalize } from 'rxjs/operators';
+import { FileMetaData } from 'src/app/models/file-upload.model';
+import { FileService } from 'src/app/shared/services/file.service';
 
 FileMetaData;
 
@@ -69,46 +61,37 @@ export class FileuploadComponent implements OnInit {
           this.ngOnInit();
         })
       )
-      .subscribe(
-        (res: any) => {
-          this.percentage = (res.bytesTransferred * 100) / res.totalBytes;
-          if (this.percentage === 100) {
-            this.showMsg = true;
-            setTimeout(
-              () => (
-                (this.showMsg = false),
-                this.UploadForm.reset(),
-                (this.percentage = 0)
-              ),
-              3000
-            );
-          }
-        },
-        (err) => {
-          console.log('Error occured');
+      .subscribe((res: any) => {
+        this.percentage = (res.bytesTransferred * 100) / res.totalBytes;
+        if (this.percentage === 100) {
+          this.showMsg = true;
+          setTimeout(
+            () => (
+              (this.showMsg = false),
+              this.UploadForm.reset(),
+              (this.percentage = 0)
+            ),
+            3000
+          );
         }
-      );
+      });
   }
 
   getAllFiles() {
-    this.fileService.getAllFiles().subscribe(
-      (res) => {
-        this.listOfFiles = res.map((e: any) => {
-          const data = e.payload.doc.data();
-          data.id = e.payload.doc.id;
-          return data;
-        });
-      },
-      (err) => {
-        console.log('Error occured while fetching file meta data');
-      }
-    );
+    this.fileService.getAllFiles().subscribe((res) => {
+      console.log(res);
+      this.listOfFiles = res.map((e: any) => {
+        const data = e.payload.doc.data();
+        data.id = e.payload.doc.id;
+        return data;
+      });
+    });
   }
 
   deleteFile(file: FileMetaData) {
     this.fileService.deleteFile(file);
   }
-  show2(modalRef: HTMLDivElement) {
+  showDeleteModal(modalRef: HTMLDivElement) {
     const modal = new Modal(modalRef);
     modal.show();
   }

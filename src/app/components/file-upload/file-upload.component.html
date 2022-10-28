@@ -68,11 +68,16 @@
               <a
                 class="btn btn-outline-danger ms-2"
                 type="button"
-                (click)="show2(modal2)"
+                (click)="showDeleteModal(deleteModal)"
                 >Delete</a
               >
             </td>
-            <div #modal2 class="modal fade" data-backdrop="false" tabindex="-1">
+            <div
+              #deleteModal
+              class="modal fade"
+              data-backdrop="false"
+              tabindex="-1"
+            >
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">

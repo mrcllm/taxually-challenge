@@ -22,7 +22,6 @@ export class AuthService {
         this.router.navigate(['/dashboard']);
       })
       .catch((error) => {
-        console.log('Auth Service: signup error', error);
         if (error.code) {
           return { isValid: false, message: error.message };
         }
