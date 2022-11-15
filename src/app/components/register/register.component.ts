@@ -27,13 +27,11 @@ export class RegisterComponent implements OnInit {
   submit() {
     if (this.registerForm.invalid) return;
 
-    this.authService
-      .signupUser(this.registerForm.value)
-      .then((result) => {
-        if (result == null) {
-          this.router.navigate(['/dashboard']);
-        } else if (result.isValid == false)
-          this.firebaseErrorMessage = result.message;
-      })
+    this.authService.signupUser(this.registerForm.value).then((result) => {
+      console.log(result);
+      result == null
+        ? this.router.navigate(['/dashboard'])
+        : (this.firebaseErrorMessage = result.message);
+    });
   }
 }
