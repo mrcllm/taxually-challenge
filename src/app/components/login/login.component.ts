@@ -29,11 +29,9 @@ export class LoginComponent implements OnInit {
     this.authService
       .login(this.loginForm.value.email, this.loginForm.value.password)
       .then((result) => {
-        if (result == null) {
-          this.router.navigate(['/dashboard']);
-        } else if (result.isValid == false) {
-          this.firebaseErrorMessage = result.message;
-        }
+       result == null
+          ? this.router.navigate(['/dashboard'])
+          : (this.firebaseErrorMessage = result.message);
       });
   }
 }
