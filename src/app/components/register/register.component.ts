@@ -31,9 +31,7 @@ export class RegisterComponent implements OnInit {
     this.authService
       .signupUser(this.registerForm.value)
       .then((result) => {
-        console.log(result);
         if (result == null) {
-          console.log(result.isValid);
           this.router.navigate(['/dashboard']);
         } else if (result.isValid == false)
           this.firebaseErrorMessage = result.message;
