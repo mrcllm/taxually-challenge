@@ -58,7 +58,6 @@ export class FileuploadComponent implements OnInit {
 
             this.fileService.saveMetaDataOfFile(this.currentFileUpload);
           });
-          this.ngOnInit();
         })
       )
       .subscribe((res: any) => {
