@@ -14,7 +14,6 @@ export class RegisterComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  isProgressVisible!: boolean;
   firebaseErrorMessage!: string;
 
   ngOnInit(): void {
@@ -35,11 +34,6 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['/dashboard']);
         } else if (result.isValid == false)
           this.firebaseErrorMessage = result.message;
-
-        this.isProgressVisible = false;
       })
-      .catch(() => {
-        this.isProgressVisible = false;
-      });
   }
 }
