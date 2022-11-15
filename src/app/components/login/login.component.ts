@@ -26,13 +26,13 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   submit() {
-    if (this.loginForm.invalid) return;
-
     this.authService
       .login(this.loginForm.value.email, this.loginForm.value.password)
       .then((result) => {
         if (result == null) {
           this.router.navigate(['/dashboard']);
+        } else if (result.isValid == false) {
+          this.firebaseErrorMessage = result.message;
         }
       });
   }
